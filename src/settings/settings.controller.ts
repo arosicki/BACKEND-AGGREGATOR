@@ -55,7 +55,9 @@ export class SettingsController {
   })
   @ApiOperation({ summary: "fetches all settings from database" })
   @Get()
-  findAll() {}
+  async findAll() {
+    return await this.settingsService.findAll();
+  }
 
   @ApiOkResponse({
     description: "setting has been successfully fetched",
@@ -77,13 +79,15 @@ export class SettingsController {
     type: NotFoundResponseObject,
   })
   @ApiBadRequestResponse({
-    description: "incorrect request parameter",
+    description: "no setting with given id found",
     type: BadRequestResponseObject,
   })
   @ApiOperation({ summary: "fetches specified setting from database" })
   @ApiParam({ name: "id", type: "integer" })
   @Get(":id")
-  findOne(@Param("id", ParseIntPipe) _id: number) {}
+  async findOne(@Param("id", ParseIntPipe) id: number) {
+    return new OkResponseObject<Setting>("Ok", await this.settingsService.findOne(id));
+  }
 
   @Post("restore-default")
   @HttpCode(HttpStatus.OK)
@@ -92,19 +96,37 @@ export class SettingsController {
     description: "settings have been successfuly restored to default",
     type: OkResponseObject,
   })
-  async restoreDefault() {}
+  async restoreDefault() {
+    await this.settingsService.restoreDefault();
+    return new OkResponseObject("Successfully restored default settings");
+  }
 
   @ApiOkResponse({
     description: "setting has been successfully changed",
-    type: OkResponseObject,
+    schema: {
+      allOf: [
+        { $ref: getSchemaPath(OkResponseObject) },
+        {
+          properties: {
+            data: {
+              $ref: getSchemaPath(Setting),
+            },
+          },
+        },
+      ],
+    },
   })
   @ApiBadRequestResponse({
     description: "incorrect request parameters",
     type: BadRequestResponseObject,
   })
+  @ApiOperation({ summary: "updates value of given setting" })
   @Patch(":id")
-  update(@Param("id", ParseIntPipe) id: number, @Body() updateSettingDto: UpdateSettingDto) {
-    return this.settingsService.update(id, updateSettingDto);
+  async update(@Param("id", ParseIntPipe) id: number, @Body() { value }: UpdateSettingDto) {
+    return new OkResponseObject<Setting>(
+      "setting has been successfully changed",
+      await this.settingsService.update(id, value)
+    );
   }
 
   @HttpCode(HttpStatus.OK)
