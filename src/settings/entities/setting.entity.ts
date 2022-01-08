@@ -15,11 +15,11 @@ export class Setting {
   @ApiProperty({ type: "string", example: "MAX_NEWS_AGE" })
   @Column({ type: "varchar", length: 64 })
   key: string;
-  @ApiProperty({ type: "integer", example: 7200000 })
-  @Column({ type: "integer" })
+  @ApiProperty({ type: "integer", example: 7200000, minimum: 600000 })
+  @Column({ type: "int" })
   value: number;
   @ApiProperty({ type: "integer", example: 3600000 })
-  @Column({ type: "integer" })
+  @Column({ type: "int" })
   default_value: number;
   @ApiProperty({ type: "string", maxLength: 256, example: "[ms] defines how long news are stored in database" })
   @Column({ type: "varchar", length: 256, nullable: true /* Temporary */ })
