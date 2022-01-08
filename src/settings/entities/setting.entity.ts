@@ -15,7 +15,7 @@ export class Setting {
   @ApiProperty({ type: "string", example: "MAX_NEWS_AGE" })
   @Column({ type: "varchar", length: 64 })
   key: string;
-  @ApiProperty({ type: "integer", example: 7200000, minimum: 600000 })
+  @ApiProperty({ type: "integer", example: 7200000 })
   @Column({ type: "int" })
   value: number;
   @ApiProperty({ type: "integer", example: 3600000 })
