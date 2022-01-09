@@ -1,5 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity("settings")
 export class Setting {
@@ -24,4 +24,8 @@ export class Setting {
   @ApiProperty({ type: "string", maxLength: 256, example: "[ms] defines how long news are stored in database" })
   @Column({ type: "varchar", length: 256, nullable: true /* Temporary */ })
   description: string;
+
+  @ApiProperty({ type: "string", format: "dateString", example: "2022-01-22T10:30:40.000Z" })
+  @UpdateDateColumn()
+  modified: Date;
 }
