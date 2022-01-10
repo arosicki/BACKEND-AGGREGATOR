@@ -8,7 +8,7 @@ export class SignUpLocalDto {
   @MaxLength(32)
   @IsEmail()
   @IsUsernameAlreadyTaken()
-  username: string;
+  email: string;
   @IsString()
   @Matches(passwordRequirementsConfig.getRegex(), { message: passwordRequirementsConfig.getDescription() })
   password: string;
@@ -16,5 +16,5 @@ export class SignUpLocalDto {
   @MinLength(3)
   @MaxLength(16)
   @IsOptional()
-  name?: string;
+  username?: string;
 }
