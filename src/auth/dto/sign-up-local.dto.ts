@@ -2,7 +2,7 @@ import { IsOptional, IsString, Matches, MaxLength, MinLength } from "class-valid
 import { passwordRequirementsConfig } from "src/config/password-requirements-config";
 import { IsUsernameAlreadyTaken } from "../decorators";
 
-export class signUpLocalDto {
+export class SignUpLocalDto {
   @IsString()
   @MinLength(6)
   @MaxLength(32)

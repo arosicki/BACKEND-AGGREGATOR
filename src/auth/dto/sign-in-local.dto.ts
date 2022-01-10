@@ -1,6 +1,6 @@
 import { IsString, MaxLength, MinLength } from "class-validator";
 
-export class signInLocalDto {
+export class SignInLocalDto {
   @IsString()
   @MinLength(6)
   @MaxLength(32)
