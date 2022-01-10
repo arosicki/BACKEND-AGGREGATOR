@@ -50,6 +50,9 @@ export class User {
   @Column({ type: "enum", enum: UserTypes, default: UserTypes.BASIC })
   type: UserTypes;
 
+  @Column({ type: "varchar", length: 64 })
+  refreshToken: string;
+
   @ApiProperty({ type: "string", format: "dateString", example: "2022-01-22T10:30:40.000Z" })
   @CreateDateColumn()
   created: Date;
