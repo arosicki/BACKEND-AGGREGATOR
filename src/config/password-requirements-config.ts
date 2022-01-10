@@ -9,6 +9,9 @@ export const passwordRequirementsConfig = {
     if (this.maxLength > 64) {
       throw new Error("max password length is larger than maximum allowed value"); //due to db restrictions
     }
+    if (this.maxLength < this.minLength) {
+      throw new Error("min password length is larger than max password length");
+    }
 
     return new RegExp(
       "/^" + this.hasNumbers
