@@ -1,1 +1,1 @@
-export * from "./is-username-already-taken";
+export * from "./is-email-already-taken";

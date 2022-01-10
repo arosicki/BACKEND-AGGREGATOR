@@ -1,4 +1,4 @@
-import { IsOptional, IsString, Matches, MaxLength, MinLength } from "class-validator";
+import { IsEmail, IsOptional, IsString, Matches, MaxLength, MinLength } from "class-validator";
 import { passwordRequirementsConfig } from "src/config/password-requirements-config";
 import { IsUsernameAlreadyTaken } from "../decorators";
 
@@ -6,6 +6,7 @@ export class SignUpLocalDto {
   @IsString()
   @MinLength(6)
   @MaxLength(32)
+  @IsEmail()
   @IsUsernameAlreadyTaken()
   username: string;
   @IsString()
