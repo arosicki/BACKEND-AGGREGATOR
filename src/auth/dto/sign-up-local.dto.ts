@@ -1,13 +1,13 @@
 import { IsEmail, IsOptional, IsString, Matches, MaxLength, MinLength } from "class-validator";
 import { passwordRequirementsConfig } from "src/config/password-requirements-config";
-import { IsUsernameAlreadyTaken } from "../decorators";
+import { IsEmailAlreadyUsed } from "../decorators";
 
 export class SignUpLocalDto {
   @IsString()
   @MinLength(6)
   @MaxLength(32)
   @IsEmail()
-  @IsUsernameAlreadyTaken()
+  @IsEmailAlreadyUsed()
   email: string;
   @IsString()
   @Matches(passwordRequirementsConfig.getRegex(), { message: passwordRequirementsConfig.getDescription() })
