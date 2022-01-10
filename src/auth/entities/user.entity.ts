@@ -9,11 +9,11 @@ export enum UserTypes {
 
 @Entity("users")
 export class User {
-  constructor(username: string, password: string, name: string, type: UserTypes = UserTypes.BASIC) {
+  constructor(email: string, password: string, username: string, type: UserTypes = UserTypes.BASIC) {
     this.username = username;
     this.password = password;
     this.type = type;
-    this.name = name ?? username;
+    this.email = email;
   }
   @ApiProperty({ type: "integer", example: 11 })
   @PrimaryGeneratedColumn()
@@ -26,8 +26,8 @@ export class User {
     minLength: 6,
     maxLength: 32,
   })
-  @Column({ type: "varchar", length: 32, unique: true })
-  username: string;
+  @Column({ type: "varchar", length: 64, unique: true })
+  email: string;
 
   @Column({ type: "varchar", length: 64 })
   password: string;
@@ -40,7 +40,7 @@ export class User {
     maxLength: 16,
   })
   @Column({ type: "varchar", length: 16 })
-  name: string;
+  username: string;
 
   @ApiProperty({
     type: "string",
