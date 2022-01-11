@@ -24,6 +24,7 @@ export class AuthService {
       secret: Buffer.from(this.configService.get<string>("HASH_SECRET")!, "utf-8"),
     });
     const newUser = new User(email, passwordHash, username);
+
     await this.userRepository.save(newUser);
 
     const accessToken = await this.getAccessToken(newUser.id, newUser.email, newUser.type);

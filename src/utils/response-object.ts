@@ -27,7 +27,7 @@ export class OkResponseObject<T> extends ResponseObject<T> {
 
 export class CreatedResponseObject<T> extends ResponseObject<T> {
   constructor(message: string, data?: T) {
-    super(HttpStatus.OK, message, data);
+    super(HttpStatus.CREATED, message, data);
   }
   /* otherwise can't override decorators */
   @ApiProperty({ type: "201", example: HttpStatus.CREATED })
