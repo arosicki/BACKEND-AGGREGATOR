@@ -30,7 +30,7 @@ export class User {
 
   @ApiProperty({
     type: "string",
-    example: "pussydestroyer69",
+    example: "user@foo.bar",
     description: "used to log in",
     minLength: 6,
     maxLength: 32,
@@ -38,7 +38,7 @@ export class User {
   @Column({ type: "varchar", length: 64, unique: true })
   email: string;
 
-  @Column({ type: "varchar", length: 64 })
+  @Column({ type: "varchar", length: 128 })
   password: string;
 
   @ApiProperty({
@@ -64,9 +64,9 @@ export class User {
   token: Token;
 
   @ApiProperty({ type: "string", format: "dateString", example: "2022-01-22T10:30:40.000Z" })
-  @CreateDateColumn()
+  @CreateDateColumn({ type: "timestamptz" })
   created: Date;
   @ApiProperty({ type: "string", format: "dateString", example: "2022-01-22T10:30:40.000Z" })
-  @UpdateDateColumn()
+  @UpdateDateColumn({ type: "timestamptz" })
   modified: Date;
 }

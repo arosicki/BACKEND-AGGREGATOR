@@ -14,6 +14,6 @@ export class Token {
   refreshToken: string;
   @OneToOne(() => User, (user) => user.token)
   user: User;
-  @UpdateDateColumn()
+  @UpdateDateColumn({ type: "timestamptz" })
   modified: Date;
 }
