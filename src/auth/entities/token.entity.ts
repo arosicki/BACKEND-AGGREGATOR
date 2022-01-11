@@ -5,9 +5,12 @@ import { User } from ".";
 
 @Entity("tokens")
 export class Token {
+  constructor(token: string) {
+    this.refreshToken = token;
+  }
   @PrimaryGeneratedColumn()
   id: number;
-  @Column({ type: "varchar", length: 64 })
+  @Column({ type: "varchar", length: 256 })
   refreshToken: string;
   @OneToOne(() => User, (user) => user.token)
   user: User;
