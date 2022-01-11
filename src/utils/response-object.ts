@@ -25,6 +25,17 @@ export class OkResponseObject<T> extends ResponseObject<T> {
   message: string;
 }
 
+export class CreatedResponseObject<T> extends ResponseObject<T> {
+  constructor(message: string, data?: T) {
+    super(HttpStatus.OK, message, data);
+  }
+  /* otherwise can't override decorators */
+  @ApiProperty({ type: "201", example: HttpStatus.CREATED })
+  statusCode: HttpStatus.CREATED;
+  @ApiProperty({ type: "string", example: "Created" })
+  message: string;
+}
+
 export class InternalServerErrorResponseObject extends ResponseObject {
   constructor(message: string) {
     super(HttpStatus.INTERNAL_SERVER_ERROR, message);
