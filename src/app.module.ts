@@ -14,7 +14,7 @@ import { envValidator } from "./utils/env-validator";
     TypeOrmModule.forRoot(),
     SettingsModule,
     AuthModule,
-    ConfigModule.forRoot({ isGlobal: true, validate: envValidator }),
+    ConfigModule.forRoot({ isGlobal: true, validate: envValidator, cache: true }),
   ],
   controllers: [AppController],
   providers: [AppService],
