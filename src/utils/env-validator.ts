@@ -4,7 +4,7 @@ import { IsInt, IsString, Max, Min, MinLength, validateSync } from "class-valida
 class EnvironmentVariables {
   @IsString()
   @MinLength(8)
-  PASSWORD_SECRET: string;
+  HASH_SECRET: string;
   @IsInt()
   @Min(1)
   @Max(65535)
