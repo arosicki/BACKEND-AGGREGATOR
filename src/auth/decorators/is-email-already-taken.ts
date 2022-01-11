@@ -12,7 +12,7 @@ import { getRepository } from "typeorm";
 export class IsEmailAlreadyUsedConstraint implements ValidatorConstraintInterface {
   async validate(email: string, _args: ValidationArguments) {
     const user = await getRepository(User).find({ where: { email: email } });
-    return !!user;
+    return !user;
   }
   defaultMessage = (_args: ValidationArguments) => "$value already has an account";
 }
