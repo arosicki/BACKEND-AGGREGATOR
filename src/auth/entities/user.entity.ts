@@ -1,5 +1,14 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  JoinColumn,
+  OneToOne,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from "typeorm";
+import { Token } from ".";
 
 export enum UserTypes {
   BASIC = "basic",
@@ -50,8 +59,9 @@ export class User {
   @Column({ type: "enum", enum: UserTypes, default: UserTypes.BASIC })
   type: UserTypes;
 
-  @Column({ type: "varchar", length: 64 })
-  refreshToken: string;
+  @OneToOne(() => Token, (token) => token.user)
+  @JoinColumn()
+  token: Token;
 
   @ApiProperty({ type: "string", format: "dateString", example: "2022-01-22T10:30:40.000Z" })
   @CreateDateColumn()
