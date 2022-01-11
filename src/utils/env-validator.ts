@@ -2,6 +2,9 @@ import { plainToClass } from "class-transformer";
 import { IsInt, IsString, Max, Min, MinLength, validateSync } from "class-validator";
 
 class EnvironmentVariables {
+  @IsString()
+  @MinLength(8)
+  PASSWORD_SECRET: string;
   @IsInt()
   @Min(1)
   @Max(65535)
