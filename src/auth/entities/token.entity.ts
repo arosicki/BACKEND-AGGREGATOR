@@ -1,4 +1,4 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { User } from ".";
 
 /* Created to prevent changing up modified every time new refresh token is generated */
@@ -14,6 +14,6 @@ export class Token {
   refreshToken: string;
   @ManyToOne(() => User, (user) => user.token)
   user: User;
-  @UpdateDateColumn({ type: "timestamptz" })
-  modified: Date;
+  @CreateDateColumn({ type: "timestamptz" })
+  created: Date;
 }
