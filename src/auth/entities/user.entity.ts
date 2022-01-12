@@ -4,7 +4,7 @@ import {
   CreateDateColumn,
   Entity,
   JoinColumn,
-  OneToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
@@ -59,7 +59,7 @@ export class User {
   @Column({ type: "enum", enum: UserTypes, default: UserTypes.BASIC })
   type: UserTypes;
 
-  @OneToOne(() => Token, (token) => token.user)
+  @OneToMany(() => Token, (token) => token.user)
   @JoinColumn()
   token: Token;
 

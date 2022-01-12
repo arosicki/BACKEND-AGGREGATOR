@@ -1,4 +1,4 @@
-import { Column, Entity, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { User } from ".";
 
 /* Created to prevent changing up modified every time new refresh token is generated */
@@ -12,7 +12,7 @@ export class Token {
   id: number;
   @Column({ type: "varchar", length: 256 })
   refreshToken: string;
-  @OneToOne(() => User, (user) => user.token)
+  @ManyToOne(() => User, (user) => user.token)
   user: User;
   @UpdateDateColumn({ type: "timestamptz" })
   modified: Date;
