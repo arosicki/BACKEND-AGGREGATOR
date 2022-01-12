@@ -8,6 +8,7 @@ interface AccessTokenPayload {
   id: number;
   email: string;
   userType: UserTypes;
+  username: string;
 }
 @Injectable()
 export class AccessTokenStrategy extends PassportStrategy(Strategy, "jwt") {
