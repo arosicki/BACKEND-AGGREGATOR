@@ -1,5 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { IsEmail, IsString, MaxLength } from "class-validator";
+import { IsAccountExists } from "../decorators";
 
 export class SignInLocalDto {
   @IsString()
@@ -10,13 +11,13 @@ export class SignInLocalDto {
     format: "email",
     maxLength: 32,
   })
+  @IsAccountExists()
   email: string;
   @IsString()
   @MaxLength(32)
   @ApiProperty({
-    example: "Adrian",
-    maxLength: 16,
-    minLength: 3,
+    example: "zaq1@WSX",
+    maxLength: 32,
   })
   password: string;
 }
