@@ -12,6 +12,9 @@ class EnvironmentVariables {
   @IsString()
   @MinLength(8)
   ACCESS_TOKEN_SECRET: string;
+  @IsString()
+  @MinLength(8)
+  COOKIE_SECRET: string;
 
   @IsInt()
   @Min(60)
