@@ -9,24 +9,22 @@ import { User } from "src/auth/entities/user.entity";
 import { getRepository } from "typeorm";
 
 @ValidatorConstraint({ async: true })
-export class IsEmailAlreadyUsedConstraint implements ValidatorConstraintInterface {
+export class IsAccountExistsConstraint implements ValidatorConstraintInterface {
   async validate(email: string, _args: ValidationArguments) {
     const users = await getRepository(User).find({ where: { email: email } });
-    return !users[0];
+    return !!users[0];
   }
-  defaultMessage = (_args: ValidationArguments) => "$value already has an account";
+  defaultMessage = (_args: ValidationArguments) => "$value does not have account";
 }
 
-export function IsEmailAlreadyUsed(validationOptions?: ValidationOptions) {
+export function IsAccountExists(validationOptions?: ValidationOptions) {
   return function (object: Object, propertyName: string) {
     registerDecorator({
       target: object.constructor,
       propertyName: propertyName,
       options: validationOptions,
       constraints: [],
-      validator: IsEmailAlreadyUsedConstraint,
+      validator: IsAccountExistsConstraint,
     });
   };
 }
-
-
