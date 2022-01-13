@@ -6,3 +6,7 @@ export interface TokenPayload {
   userType: UserTypes;
   username: string;
 }
+
+export interface RefreshTokenPayload extends TokenPayload {
+  refreshToken: string;
+}
