@@ -5,11 +5,9 @@ import { Interval } from "@nestjs/schedule";
 import { InjectRepository } from "@nestjs/typeorm";
 import { hash, verify } from "argon2";
 import { LessThan, Repository } from "typeorm";
-import { SignInLocalDto, SignUpLocalDto } from "./dto";
-import { ChangePasswordLocalDto } from "./dto/change-password-local.dto";
+import { SignInLocalDto, SignUpLocalDto, ChangePasswordLocalDto } from "./dto";
 import { Token, User, UserTypes } from "./entities";
-import { TokensInterface } from "./interfaces";
-import { RefreshTokenPayload } from "./interfaces/token-payload.interface";
+import { TokensInterface, RefreshTokenPayload } from "./interfaces";
 
 @Injectable()
 export class AuthService {

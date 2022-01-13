@@ -4,11 +4,10 @@ import { ApiTags } from "@nestjs/swagger";
 import { Response } from "express";
 import { CreatedResponseObject, OkResponseObject } from "src/utils/response-object";
 import { AuthService } from "./auth.service";
-import { SignInLocalDto, SignUpLocalDto } from "./dto";
+import { SignInLocalDto, SignUpLocalDto, ChangePasswordLocalDto } from "./dto";
 import { AccessTokenObject } from "./classes";
 import { AuthGuard } from "@nestjs/passport";
 import { RefreshRequestWithUser } from "./interfaces";
-import { ChangePasswordLocalDto } from "./dto/change-password-local.dto";
 @Controller("auth")
 @ApiTags("auth")
 export class AuthController {
