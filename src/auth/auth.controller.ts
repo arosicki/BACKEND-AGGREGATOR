@@ -1,4 +1,4 @@
-import { Body, Controller, HttpCode, HttpStatus, Post, Req, Res, UseGuards } from "@nestjs/common";
+import { Body, Controller, HttpCode, HttpStatus, Post, Res, UseGuards } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { ApiTags } from "@nestjs/swagger";
 import { Response } from "express";
@@ -7,7 +7,8 @@ import { AuthService } from "./auth.service";
 import { SignInLocalDto, SignUpLocalDto, ChangePasswordLocalDto } from "./dto";
 import { AccessTokenObject } from "./classes";
 import { AuthGuard } from "@nestjs/passport";
-import { RefreshRequestWithUser } from "./interfaces";
+import { CurrentUser } from "src/common/decorators";
+import { RefreshTokenPayload } from "./interfaces";
 @Controller("auth")
 @ApiTags("auth")
 export class AuthController {
@@ -29,7 +30,7 @@ export class AuthController {
     const { refreshToken, accessToken } = await this.authService.signInLocal(signInLocalDto);
     const cookieMaxAge = this.configService.get<number>("REFRESH_TOKEN_TTL")!;
     res.cookie("na_rt", refreshToken, { maxAge: cookieMaxAge, httpOnly: true }); // setting it later than jwt expiresIn shouldn't cause issues
-    return new OkResponseObject<AccessTokenObject>("succesfully logged in", new AccessTokenObject(accessToken));
+    return new OkResponseObject<AccessTokenObject>("successfully logged in", new AccessTokenObject(accessToken));
   }
   @HttpCode(HttpStatus.OK)
   @Post("local/changepassword")
@@ -46,14 +47,19 @@ export class AuthController {
   @UseGuards(AuthGuard("jwt-refresh"))
   @Post("logout")
   @HttpCode(HttpStatus.OK)
-  async logout(@Req() req: RefreshRequestWithUser) {
-    this.authService.logout(req.user.sub, req.user.refreshToken);
+  async logout(@CurrentUser() user: RefreshTokenPayload) {
+    await this.authService.logout(user.sub, user.refreshToken);
+    return new OkResponseObject<AccessTokenObject>("logged out successfully");
   }
 
   @UseGuards(AuthGuard("jwt-refresh"))
   @Post("refresh")
   @HttpCode(HttpStatus.OK)
-  async refreshToken(@Req() req: RefreshRequestWithUser) {
-    this.authService.refreshToken(req.user);
+  async refreshToken(@CurrentUser() user: RefreshTokenPayload) {
+    const refreshToken = await this.authService.refreshToken(user);
+    return new OkResponseObject<AccessTokenObject>(
+      "password successfully changed",
+      new AccessTokenObject(refreshToken)
+    );
   }
 }
