@@ -1,7 +1,7 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { IsEmail, IsString, Matches, MaxLength } from "class-validator";
 import { passwordRequirementsConfig } from "src/config/password-requirements-config";
-import { IsAccountExists } from "../decorators";
+import { IsAccountExists } from "../../common/decorators";
 
 export class ChangePasswordLocalDto {
   @IsString()

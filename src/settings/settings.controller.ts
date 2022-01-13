@@ -18,7 +18,7 @@ import {
   InternalServerErrorResponseObject,
   NotFoundResponseObject,
   OkResponseObject,
-} from "src/utils/response-object";
+} from "src/common/classes/response-object";
 import { Setting } from "./entities/setting.entity";
 
 @ApiTags("settings")

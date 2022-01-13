@@ -1,7 +1,7 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { IsEmail, IsString, Matches, MaxLength, MinLength } from "class-validator";
 import { passwordRequirementsConfig } from "src/config/password-requirements-config";
-import { IsEmailAlreadyUsed } from "../decorators";
+import { IsEmailAlreadyUsed } from "../../common/decorators";
 
 export class SignUpLocalDto {
   @IsString()

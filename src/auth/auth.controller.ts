@@ -2,7 +2,7 @@ import { Body, Controller, HttpCode, HttpStatus, Post, Req, Res, UseGuards } fro
 import { ConfigService } from "@nestjs/config";
 import { ApiTags } from "@nestjs/swagger";
 import { Response } from "express";
-import { CreatedResponseObject, OkResponseObject } from "src/utils/response-object";
+import { CreatedResponseObject, OkResponseObject } from "src/common/classes/response-object";
 import { AuthService } from "./auth.service";
 import { SignInLocalDto, SignUpLocalDto, ChangePasswordLocalDto } from "./dto";
 import { AccessTokenObject } from "./classes";

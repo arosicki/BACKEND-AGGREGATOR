@@ -6,7 +6,7 @@ import { ScheduleModule } from "@nestjs/schedule";
 import { SettingsModule } from "./settings/settings.module";
 import { AuthModule } from "./auth/auth.module";
 import { ConfigModule } from "@nestjs/config";
-import { envValidator } from "./utils/env-validator";
+import { envValidator } from "./common/classes/env-validator";
 
 @Module({
   imports: [

@@ -1,6 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { IsEmail, IsString, MaxLength } from "class-validator";
-import { IsAccountExists } from "../decorators";
+import { IsAccountExists } from "../../common/decorators";
 
 export class SignInLocalDto {
   @IsString()
