@@ -7,8 +7,8 @@ import { hash, verify } from "argon2";
 import { LessThan, Repository } from "typeorm";
 import { SignInLocalDto, SignUpLocalDto, ChangePasswordLocalDto } from "./dto";
 import { Token, User } from "./entities";
-import { UserTypes } from "src/common/interfaces/user-types";
-import { TokensInterface, RefreshTokenPayload } from "../common/interfaces";
+import { UserTypes } from "src/common/types/user-types.enum";
+import { TokensInterface, RefreshTokenPayload } from "../common/types";
 
 @Injectable()
 export class AuthService {
