@@ -7,7 +7,7 @@ import { AuthService } from "./auth.service";
 import { SignInLocalDto, SignUpLocalDto, ChangePasswordLocalDto } from "./dto";
 import { AccessTokenObject } from "./classes";
 import { CurrentUser, Public } from "src/common/decorators";
-import { RefreshTokenPayload } from "./interfaces";
+import { RefreshTokenPayload } from "../common/interfaces";
 import { JwtRefreshGuard } from "src/common/guards";
 @Controller("auth")
 @ApiTags("auth")

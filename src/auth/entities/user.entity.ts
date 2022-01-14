@@ -9,12 +9,7 @@ import {
   UpdateDateColumn,
 } from "typeorm";
 import { Token } from ".";
-
-export enum UserTypes {
-  BASIC = "basic",
-  PREMIUM = "premium",
-  ADMIN = "admin",
-}
+import { UserTypes } from "src/common/interfaces/user-types";
 
 @Entity("users")
 export class User {

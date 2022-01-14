@@ -1,4 +1,4 @@
-import { UserTypes } from "../entities";
+import { UserTypes } from "./user-types";
 
 export interface TokenPayload {
   sub: number;

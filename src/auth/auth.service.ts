@@ -6,8 +6,9 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { hash, verify } from "argon2";
 import { LessThan, Repository } from "typeorm";
 import { SignInLocalDto, SignUpLocalDto, ChangePasswordLocalDto } from "./dto";
-import { Token, User, UserTypes } from "./entities";
-import { TokensInterface, RefreshTokenPayload } from "./interfaces";
+import { Token, User } from "./entities";
+import { UserTypes } from "src/common/interfaces/user-types";
+import { TokensInterface, RefreshTokenPayload } from "../common/interfaces";
 
 @Injectable()
 export class AuthService {
