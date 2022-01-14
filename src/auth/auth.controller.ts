@@ -6,11 +6,12 @@ import { CreatedResponseObject, OkResponseObject } from "src/common/classes/resp
 import { AuthService } from "./auth.service";
 import { SignInLocalDto, SignUpLocalDto, ChangePasswordLocalDto } from "./dto";
 import { AccessTokenObject } from "./classes";
-import { AuthGuard } from "@nestjs/passport";
-import { CurrentUser } from "src/common/decorators";
+import { CurrentUser, Public } from "src/common/decorators";
 import { RefreshTokenPayload } from "./interfaces";
+import { JwtRefreshGuard } from "src/common/guards";
 @Controller("auth")
 @ApiTags("auth")
+@Public()
 export class AuthController {
   constructor(private readonly authService: AuthService, private readonly configService: ConfigService) {}
 
@@ -44,7 +45,7 @@ export class AuthController {
     return new OkResponseObject<AccessTokenObject>("password successfully changed", new AccessTokenObject(accessToken));
   }
 
-  @UseGuards(AuthGuard("jwt-refresh"))
+  @UseGuards(JwtRefreshGuard)
   @Post("logout")
   @HttpCode(HttpStatus.OK)
   async logout(@CurrentUser() user: RefreshTokenPayload) {
@@ -52,7 +53,7 @@ export class AuthController {
     return new OkResponseObject<AccessTokenObject>("logged out successfully");
   }
 
-  @UseGuards(AuthGuard("jwt-refresh"))
+  @UseGuards(JwtRefreshGuard)
   @Post("refresh")
   @HttpCode(HttpStatus.OK)
   async refreshToken(@CurrentUser() user: RefreshTokenPayload) {

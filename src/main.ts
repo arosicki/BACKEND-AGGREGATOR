@@ -8,9 +8,11 @@ import { validationPipeConfig } from "./config/validation-pipe-config";
 
 (async () => {
   const app = await NestFactory.create(AppModule);
+  const configService = app.get(ConfigService);
   app.useGlobalPipes(new ValidationPipe(validationPipeConfig));
+  app.use(cookieParser(configService.get("COOKIE_SECRET")!));
 
-  const config = new DocumentBuilder()
+  const swaggerConfig = new DocumentBuilder()
     .setTitle("News Aggregator")
     .setDescription("News Aggregator API")
     .setVersion("1.0.0")
@@ -18,9 +20,8 @@ import { validationPipeConfig } from "./config/validation-pipe-config";
     .setContact("Adrian Rosicki", "", "")
     .build();
 
-  const document = SwaggerModule.createDocument(app, config);
+  const document = SwaggerModule.createDocument(app, swaggerConfig);
   SwaggerModule.setup("api", app, document);
-  const configService = app.get(ConfigService);
-  app.use(cookieParser(configService.get("COOKIE_SECRET")!));
+
   await app.listen(configService.get("PORT") as number);
 })();
